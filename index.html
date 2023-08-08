@@ -3,68 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PO Generator</title>
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            padding-top: 100px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            text-align: center;
-            font-size: 2em;
-        }
-
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
-    <div>
-        <select id="dropdownMenu">
-            <option value="Option1">Option1</option>
-            <option value="Option2">Option2</option>
-            <option value="Option3">Option3</option>
-            <!-- Add more options as you like -->
-        </select>
-
-        <button onclick="generatePO()">ADD PO</button>
-        <button onclick="downloadCSV()">Download CSV</button>
-    </div>
-
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="result"></p>
-        </div>
-    </div>
-
     <script src="script.js"></script>
 </body>
 

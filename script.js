@@ -1,48 +1,70 @@
-let startingNumber = 4880001;
-let poList = [];
+window.onload = function () {
+    const startingNumber = 4880001;
 
-function generatePO() {
-    const dropdown = document.getElementById("dropdownMenu");
-    const selectedOption = dropdown.options[dropdown.selectedIndex].value;
-    const resultElement = document.getElementById("result");
+    // Create dropdown
+    let dropdown = document.createElement('select');
+    dropdown.style.width = "300px";
+    dropdown.style.height = "50px";
+    dropdown.style.fontSize = "20px";
+    dropdown.style.position = "absolute";
+    dropdown.style.bottom = "100px";
+    dropdown.style.left = "50%";
+    dropdown.style.transform = "translateX(-50%)";
 
-    const newPO = `${selectedOption}-${startingNumber}`;
-    resultElement.textContent = newPO;
+    // Adding options to the dropdown
+    const options = ["Option1", "Option2", "Option3", "Option4"]; // Add or remove options as required
+    options.forEach(option => {
+        let optElement = document.createElement('option');
+        optElement.value = option;
+        optElement.textContent = option;
+        dropdown.appendChild(optElement);
+    });
+    document.body.appendChild(dropdown);
 
-    addToCSV(newPO);
-    startingNumber++;
+    // Create button
+    let button = document.createElement('button');
+    button.textContent = "ADD PO";
+    button.style.background = "blue";
+    button.style.color = "white";
+    button.style.padding = "15px 30px";
+    button.style.fontSize = "20px";
+    button.style.cursor = "pointer";
+    button.style.border = "none";
+    button.style.borderRadius = "5px";
+    button.style.marginTop = "20px";
+    button.style.position = "absolute";
+    button.style.bottom = "40px";
+    button.style.left = "50%";
+    button.style.transform = "translateX(-50%)";
 
-    showModal();
-}
+    button.onmouseover = function () {
+        button.style.background = "#0056b3";  // Slightly darker blue on hover
+    }
+    button.onmouseout = function () {
+        button.style.background = "blue";  // Return to original blue color
+    }
 
-function addToCSV(newPO) {
-    poList.push(newPO);
-}
+    document.body.appendChild(button);
 
-function downloadCSV() {
-    const csvContent = "data:text/csv;charset=utf-8," + poList.join("\n");
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "po_list.csv");
-    document.body.appendChild(link);
-    link.click();
-}
+    let currentNumber = startingNumber;
 
-function showModal() {
-    const modal = document.getElementById("myModal");
-    modal.style.display = "block";
-}
+    button.onclick = function () {
+        const selectedOption = dropdown.options[dropdown.selectedIndex].value;
+        const newPO = `${selectedOption}-${currentNumber}`;
 
-const modal = document.getElementById("myModal");
-const span = document.getElementsByClassName("close")[0];
+        // Display the newPO in a large popup
+        alert(newPO);
 
-span.onclick = function () {
-    modal.style.display = "none";
-}
+        // Increase the current number for next PO
+        currentNumber += 1;
 
-window.onclick = function (event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
+        // Add the newPO to a local CSV (you can enhance this to save to a file or upload elsewhere)
+        const csvContent = `data:text/csv;charset=utf-8,${newPO}\r\n`;
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "po_data.csv");
+        document.body.appendChild(link); // Required for Firefox
+        link.click();
     }
 }
